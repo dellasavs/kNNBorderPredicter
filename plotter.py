@@ -37,27 +37,3 @@ def init(places):
 init(places)
 plt.axis([100, 60, 40, 60])
 plt.show()
-""" zip()
-for weights in ['uniform']:
-    clf = neighbors.KNeighborsClassifier(3)
-    clf.fit(points['Ontario'], list(range(162)))
-    # Plot the decision boundary. For that, we will assign a color to each
-    # point in the mesh [x_min, x_max]x[y_min, y_max].
-    x_min = min(points['Ontario'])
-    x_max = max(points['Ontario'])
-    y_min = min(points['Ontario'])
-    y_max = max(points['Ontario'])
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                         np.arange(y_min, y_max, h))
-    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-    # Put the result into a color plot
-    Z = Z.reshape(xx.shape)
-    plt.figure()
-    plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
-    # Plot also the training points
-    plt.scatter(points['Ontario'][0][:, 0], points['Ontario'][0][:, 1], c=y, cmap=cmap_bold)
-    plt.xlim(xx.min(), xx.max())
-    plt.ylim(yy.min(), yy.max())
-    plt.title("3-Class classification (k = %i, weights = '%s')"
-              % (n_neighbors, weights))
-"""

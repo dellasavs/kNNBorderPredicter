@@ -16,13 +16,10 @@ placeLabel =   {'Ontario': 0,
                 'Minnesota': 7}
 
 places = ['Ontario', 'Quebec', 'NY', 'Michigan', 'Manitoba', 'Wisconsin', 'Ohio', 'Minnesota']
-colors = ['red', 'blue', 'green', 'purple', 'yellow', 'cyan', 'black', 'green']
-marker = 'o'
-points = {}
-zipper = []
 labels = []
 allPoints = []
-pointCount = 200
+pointCount = 1000
+classCount = 8
 
 def init(places):
         for place in places:
@@ -33,7 +30,7 @@ def init(places):
                         allPoints.append([float(coord[1])*-1,float(coord[0])])
 
 init(places)
-n_neighbors = 7 # nearest neighbours
+k = 7 # nearest neighbours
 h = .02  # step size in the mesh
 
 #Create color maps
@@ -41,7 +38,7 @@ cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF', '#FFFFAF', '#FF9EE
 cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00B2', '#7c7c7c', '#00FFFA', '#f98d00'])
 
 for weights in ['uniform']:
-    clf = neighbors.KNeighborsClassifier(n_neighbors=)
+    clf = neighbors.KNeighborsClassifier(n_neighbors=k)
     clf.fit(allPoints, labels)
     # Plot the decision boundary. For that, we will assign a color to each
     # point in the mesh [x_min, x_max]x[y_min, y_max].
@@ -61,6 +58,6 @@ for weights in ['uniform']:
     # Plot also the training points
     plt.scatter(list(p[0] for p in allPoints), list(p[1] for p in allPoints), c=labels, cmap=cmap_bold)
     plt.axis([100, 60, 40, 60])
-    plt.title("N-Class classification (k = %i, points per area = '%s')"
-              % (n_neighbors, pointCount))
+    plt.title("N-Class classification (k = %i, total training points = '%s')"
+              % (k, pointCount*classCount))
 plt.show()
