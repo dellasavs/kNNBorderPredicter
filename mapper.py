@@ -18,24 +18,35 @@ placeLabel =   {'Ontario': 0,
 places = ['Ontario', 'Quebec', 'NY', 'Michigan', 'Manitoba', 'Wisconsin', 'Ohio', 'Minnesota']
 labels = []
 allPoints = []
-pointCount = 400
-classCount = 8
+pointCount = 162
+classCount = 2
+#(42.318939, -83.038779)
+def init():
+        f=open('ONpoints.txt', 'r')
+        for i in range(pointCount):
+                coord = f.readline().split(',')
+                coord[0] = coord[0].replace('(', '')
+                coord[1] = coord[1].replace(')', '')
+                coord[1] = coord[1].replace(' ', '')
+                labels.append(1)
+                allPoints.append([float(coord[1])*-1,float(coord[0])])
+        f=open('otherpoints.txt', 'r')
+        for i in range(171):
+                coord = f.readline().split(',')
+                coord[0] = coord[0].replace('(', '')
+                coord[1] = coord[1].replace(')', '')
+                coord[1] = coord[1].replace(' ', '')
+                labels.append(0)
+                allPoints.append([float(coord[1])*-1,float(coord[0])])
 
-def init(places):
-        for place in places:
-                f=open(place + 'Pulled.txt', 'r')
-                for i in range(pointCount):
-                        coord = f.readline().split(',')
-                        labels.append(placeLabel[place])
-                        allPoints.append([float(coord[1])*-1,float(coord[0])])
 
-init(places)
-k = 5 # nearest neighbours
+init()
+k = 1 # nearest neighbours
 h = .02  # step size in the mesh
 
 #Create color maps
-cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA', '#AAAAFF', '#FFFFAF', '#FF9EE1', '#d6d6d6', '#ADFFFA', '#f9bd6d'])
-cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00B2', '#7c7c7c', '#00FFFA', '#f98d00'])
+cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA']) # '#AAAAFF', '#FFFFAF', '#FF9EE1', '#d6d6d6', '#ADFFFA', '#f9bd6d'])
+cmap_bold = ListedColormap(['#FF0000', '#00FF00']) # '#0000FF', '#FFFF00', '#FF00B2', '#7c7c7c', '#00FFFA', '#f98d00'])
 
 for weights in ['uniform']:
     clf = neighbors.KNeighborsClassifier(n_neighbors=k)
