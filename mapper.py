@@ -18,7 +18,7 @@ placeLabel =   {'Ontario': 0,
 places = ['Ontario', 'Quebec', 'NY', 'Michigan', 'Manitoba', 'Wisconsin', 'Ohio', 'Minnesota']
 labels = []
 allPoints = []
-pointCount = 1000
+pointCount = 400
 classCount = 8
 
 def init(places):
@@ -30,7 +30,7 @@ def init(places):
                         allPoints.append([float(coord[1])*-1,float(coord[0])])
 
 init(places)
-k = 7 # nearest neighbours
+k = 5 # nearest neighbours
 h = .02  # step size in the mesh
 
 #Create color maps
